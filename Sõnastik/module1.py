@@ -1,31 +1,31 @@
 ﻿import random
 
-def Loe_failist(fail: str) -> list:
+def Loe_failist(fail: str) -> list:    #Эта функция принимает имя файла в качестве аргумента и возвращает список слов, считанных из этого файла.
     f = open(fail, 'r', encoding="utf-8-sig")
     mas = []
     for rida in f:
-        mas.append(rida.strip('\n').upper())
+        mas.append(rida.strip('\n').upper())    
     f.close()
     return mas
 
-def lisamine(mas: list, file: str):
+def lisamine(mas: list, file: str):    #Эта функция добавляет список слов mas в файл с именем file.
     f = open(file, 'w', encoding="utf-8-sig")
     for item in mas:
         f.write(item + "\n")
     f.close()
 
-def connect(est: list, rus: list) -> None:
+def connect(est: list, rus: list) -> None:    #Эта функция выводит пары слов - эстонские слова и их русские переводы, если оба списка уже имеют одинаковую длину.
     zipped = zip(est, rus)
     print(list(zipped))
 
-def elementi_lisamine(est: list, rus: list):
+def elementi_lisamine(est: list, rus: list):    ##Эта функция позволяет пользователю ввести новое слово на эстонском и его перевод на русский, добавляя их в соответствующие списки.
     es = input("Слово на эстонском: ")
     est.append(es)
     ru = input("Слово на русском: ")
     rus.append(ru)
     return est, rus
 
-def est_to_rus(est: list, rus: list):
+def est_to_rus(est: list, rus: list):    #Эта функция позволяет пользователю ввести слово на эстонском языке и выводит его перевод на русский, если слово уже есть в словаре. Пользователь может исправить перевод, если он неправильный, или добавить новое слово, если его нет в словаре.
     n = input("Пожалуйста, введите слово на эстонском языке: ").upper()
     if n in est:
         ind = est.index(n)
@@ -51,7 +51,7 @@ def est_to_rus(est: list, rus: list):
         else:
             print("Некорректный ввод.")
 
-def rus_to_est(est: list, rus: list):
+def rus_to_est(est: list, rus: list):    #Эта функция позволяет пользователю ввести слово на русском языке и выводит его перевод на эстонский, если слово уже есть в словаре. Пользователь может исправить перевод, если он неправильный, или добавить новое слово, если его нет в словаре.
     n = input("Введите слово на русском языке: ").upper()
     if n in rus:
         ind = rus.index(n)
@@ -77,7 +77,7 @@ def rus_to_est(est: list, rus: list):
         else:
             print("Некорректный ввод.")
 
-def mang(est: list, rus: list):
+def mang(est: list, rus: list):    #Эта функция проводит короткий тест для проверки знаний пользователя. Она случайным образом выбирает слова из словаря и запрашивает их перевод. После завершения теста она выводит результат в процентах правильных ответов.
     oige = 0
     total = 5
     for i in range(total):
@@ -95,7 +95,7 @@ def mang(est: list, rus: list):
     print(f"Ваш результат: {accuracy}%")
 
 
-def show_menu():
+def show_menu():    #Эта функция просто выводит меню с доступными опциями пользователю.
     print("Меню:")
     print("1. Показать все слова и их переводы")
     print("2. Добавить слово и его перевод в словарь")
@@ -104,21 +104,21 @@ def show_menu():
     print("5. Проверить знание слов из словаря")
     print("6. Выход")
 
-def main_menu(est, rus):
+def main_menu(est, rus):    #Функция выполняет основной цикл программы, который выводит главное меню пользователю и обрабатывает его выбор.
     while True:
         show_menu()
         choice = input("Выберите опцию: ")
-        if choice == "1":
+        if choice == "1":    #Опция «Показать все слова и их переводы»
             connect(est, rus)
-        elif choice == "2":
+        elif choice == "2":    #Опция «Добавить слово и его перевод в словарь»
             est, rus = elementi_lisamine(est, rus)
-        elif choice == "3":
+        elif choice == "3":    #Опция «Перевести слово с эстонского на русский»
             est_to_rus(est, rus)
-        elif choice == "4":
+        elif choice == "4":    #Опция «Перевести слово с русского на эстонский»
             rus_to_est(est, rus)
-        elif choice == "5":
+        elif choice == "5":    #Опция «Проверить знание слов из словаря»
             mang(est, rus)
-        elif choice == "6":
+        elif choice == "6":    #Опция «Выход»: завершает выполнение программы.
             print("До свидания!")
             break  # Здесь использовано ключевое слово break для завершения цикла
         else:
